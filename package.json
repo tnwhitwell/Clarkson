@@ -9,6 +9,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "start-dev-db": "docker run -v$(pwd):$(pwd) -w$(pwd) --rm --name clarkson_dev_db -d -p 3306:3306 -e MYSQL_ROOT_PASSWORD=testing -e MYSQL_DATABASE=clarkson -e MYSQL_USER=clarkson -e MYSQL_PASSWORD=testing mariadb:latest",
+    "kill-dev-db": "docker stop clarkson_dev_db",
+    "load-dev-data": "docker exec clarkson_dev_db bash scripts/load-dev-data.sh",
+    "migrate-dev-db": "bash ./flyway/flyway -user=root -password=testing -schemas=clarkson -url=jdbc:mysql://127.0.0.1 migrate",
+    "dev-server": "ENABLE_REGISTRATIONS=true MYSQL_HOST=127.0.0.1 MYSQL_USERNAME=clarkson MYSQL_PASSWORD=testing node clarkson.js",
     "prune-angular2": "npm uninstall @angular/animations @angular/common @angular/compiler @angular/core @angular/forms @angular/http @angular/platform-browser @angular/platform-browser-dynamic @angular/router angular2-flash-messages ng2-charts yargs"
   },
   "private": true,
