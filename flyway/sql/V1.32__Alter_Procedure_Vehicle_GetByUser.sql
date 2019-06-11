@@ -11,9 +11,9 @@ BEGIN
     SELECT
         *
     FROM
-        `UserVehicles` t1
-            INNER JOIN `Vehicles` t2 ON t1.vehicle = t2.id
+        `UserVehicles` UV
+            INNER JOIN `Vehicles` V ON UV.vehicle = V.id
     WHERE
-        `user` = in_user;
+        UV.`user` = in_user;
 
 END$$

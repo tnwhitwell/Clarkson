@@ -7,15 +7,11 @@ CREATE PROCEDURE `Vehicle_ShareWithUser`
     sharing_user VARCHAR(36)
 )
 BEGIN
-    INSERT INTO `UserVehicles` (`user`, `vehicle`)
+    INSERT INTO `UserVehicles` (`user`, `vehicle`, `permission`)
     SELECT
-        sharing_user, Vehicles.id
+        sharing_user, Vehicles.id, 2
     FROM
-        `Vehicles`
-    WHERE
-        `owner` = calling_user
-    AND
-        `vehicle` = vehicle;
+        `Vehicles`;
 
 END$$
 DELIMITER ;
