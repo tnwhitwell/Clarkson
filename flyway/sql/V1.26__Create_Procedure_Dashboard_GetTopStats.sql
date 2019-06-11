@@ -13,7 +13,9 @@ BEGIN
     FROM
         `Users` U
     INNER JOIN
-        `Vehicles` V ON V.`user` = U.`id`
+        `UserVehicles` UV ON  UV.`user` = U.`id`
+    INNER JOIN
+        `Vehicles` V ON UV.`user` = U.`id`
     INNER JOIN
         `Fuel` F ON F.`vehicle` = V.`id`
     WHERE
