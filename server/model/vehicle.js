@@ -1,8 +1,9 @@
-var db = require("../db/mysql");
+var db = require("../db/mysql"),
+    mysql = require("mysql");
 
 module.exports = (function() {
 
-    var create, update, remove, find, findAll;
+    var create, update, remove, find, findAll, share;
 
     create = function(userId, data, done) {
 
@@ -92,12 +93,24 @@ module.exports = (function() {
         });
     };
 
+    share = function(id, callingUser, user, done) {
+        db.get().query("CALL Vehicle_ShareWithUser(?,?,?)", [callingUser, id, user], function(error, results) {
+
+            if (error) {
+                return done(error);
+            }
+
+            return done();
+        });
+    };
+
     return {
         create,
         update,
         remove,
         find,
-        findAll
+        findAll,
+        share
     };
 
 }());

@@ -53,6 +53,10 @@ export class ApiService {
         return this.httpClient.put<VehicleApiResponse>(`${this.baseUrl}/vehicle/${vehicle.id}`, vehicle);
     }
 
+    public shareVehicle(vehicle: Vehicle, userID: String): Observable<VehicleApiResponse> {
+        return this.httpClient.post<VehicleApiResponse>(`${this.baseUrl}/vehicle/${vehicle.id}/share/${userID}`, vehicle);
+    }
+
     public deleteVehicle(vehicleId: String): Observable<GenericApiResponse> {
         return this.httpClient.delete<GenericApiResponse>(`${this.baseUrl}/vehicle/${vehicleId}`);
     }

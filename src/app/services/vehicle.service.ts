@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { ApiService } from './api.service';
 import { Vehicle } from '../model/vehicle';
+import { User } from '../model/user';
 
 @Injectable()
 export class VehicleService {
@@ -22,6 +23,10 @@ export class VehicleService {
 
     public updateVehicle(vehicle: Vehicle) {
         return this.apiService.updateVehicle(vehicle);
+    }
+
+    public shareVehicle(vehicle: Vehicle, userID: String) {
+        return this.apiService.shareVehicle(vehicle, userID)
     }
 
     public deleteVehicle(vehicleId: String) {

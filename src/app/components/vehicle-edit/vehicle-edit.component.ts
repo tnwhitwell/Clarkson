@@ -36,6 +36,9 @@ export class VehicleEditComponent implements OnInit, AfterViewChecked {
     @Output()
     public deleteSuccess: EventEmitter<string> = new EventEmitter();
 
+    @Output()
+    public shareSuccess: EventEmitter<string> = new EventEmitter();
+
     @ViewChild('closeVehicleEditModal')
     public closeVehicleEditModal: ElementRef;
 
@@ -79,6 +82,18 @@ export class VehicleEditComponent implements OnInit, AfterViewChecked {
             this.closeModal();
             this.deleteSuccess.emit(this.vehicle.id);
         });
+    }
+
+    public share() {
+        this.vehicleService.shareVehicle(this.vehicle, "01A245C7-335D-4404-AF9B6-223AFF2EF66").subscribe(
+            data => {
+                this.closeModal();
+                this.shareSuccess.emit(this.vehicle.id);
+            },
+            err => {
+                this.showErrorMessage(err);
+            }
+        );
     }
 
     public save() {

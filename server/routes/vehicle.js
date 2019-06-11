@@ -90,6 +90,15 @@ router.get("/:vehicleId/costs", function(req, res) {
     });
 });
 
+router.post("/:vehicleId/share/:shareUser", function(req, res) {
+    Vehicle.share(req.params.vehicleId,
+        req.token.id,
+        req.params.shareUser, function(error, id) {
+
+        response.handle(res, { "status": "Vehicle Shared" }, error);
+    });
+});
+
 router.post("/:vehicleId/cost", function(req, res) {
 
     Cost.create(req.params.vehicleId, req.body, function(error, id) {
